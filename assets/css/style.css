@@ -1,0 +1,18 @@
+body {
+    text-align: center;
+}
+.questions {
+    display: none;
+}
+#correct {
+    display: none;
+}
+#incorrect {
+    display: none;
+}
+#out-of-time {
+    display: none;
+}
+.answers{
+    cursor: pointer;
+}
