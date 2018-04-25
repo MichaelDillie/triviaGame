@@ -10,20 +10,31 @@ $(document).ready(function () {
     $("#start-game-btn").click(function() {
         startPage.hide();
         questionOne.show();
-        // timmer();
+        timmer();
     });
 
     $(".answers").click(function() {
-        var test = $(this).attr("data-answervalue").val();
+        var test = $(this).attr("data-answervalue");
         console.log(test);
-    })
+        if(test == 3) {
+            $("#correct").show();
+            $(".answers").hide();
+            $(".time-left").hide();
+            timeStop();
+        }
+        else {
+            $("#incorrect").show();
+            $(".answers").hide();
+            $(".time-left").hide();
+            timeStop();
+        }
+    });
 
     function timmer() {
         intervalId = setTimeout(decrement, 1000);
     }
     function decrement() {
         timeLeft--;
-        console.log(timeLeft);
         $("#time-left-num").text(timeLeft);
         timmer();
         if(timeLeft === 0) {
