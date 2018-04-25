@@ -10,7 +10,7 @@ $(document).ready(function () {
     $("#start-game-btn").click(function() {
         startPage.hide();
         questionOne.show();
-        timmer();
+        timer();
     });
 
     $(".answers").click(function() {
@@ -30,13 +30,13 @@ $(document).ready(function () {
         }
     });
 
-    function timmer() {
+    function timer() {
         intervalId = setTimeout(decrement, 1000);
     }
     function decrement() {
         timeLeft--;
         $("#time-left-num").text(timeLeft);
-        timmer();
+        timer();
         if(timeLeft === 0) {
             $(".answers").hide();
             $("#out-of-time").show();
