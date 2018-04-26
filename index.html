@@ -19,102 +19,72 @@
 
 <body>
 
-    <section class="container game-start-page">
+    <!-- Landing Page -->
+    <section class="container landing-page">
+
         <div class="row">
             <div class="col m3 blank-space"></div>
-            <div class="col m6">Quiz Title</div>
+            <div class="col m6 game-title">Dev Quiz</div>
             <div class="col m3 blank-space"></div>
         </div>
-        <!-- ROW END -->
+        <!-- Row -->
         <div class="row">
             <div class="col m3 blank-space"></div>
-            <a class="col m6 waves-effect waves-light btn" id="start-game-btn">Start Quiz</a>
+            <img src="" alt="landing img" class="col m6 landing-img">
             <div class="col m3 blank-space"></div>
         </div>
+        <!-- Row -->
+        <div class="row">
+            <div class="col m3 blank-space"></div>
+            <a class="waves-effect waves-light btn start-game-btn">Start Game</a>
+            <div class="col m3 blank-space"></div>
+        </div>
+        <!-- Row -->
+
     </section>
+    <!-- END Landing Page -->
 
-    <!-- QUESTION 1 -->
+    <!-- ********************************* -->
 
-    <section class="container questions" id="q-1">
-        <span class="row time-left">Time left:
-            <span id="time-left-num">30</span>
-        </span>
+    <!-- Questions Page -->
+    <section class="container questions-page">
+
+        <div class="row">
+            <div class="col m3 blank-space"></div>
+            <div class="col m6 timer"></div>
+            <div class="col m3 blank-space"></div>
+        </div>
+        <!-- Row -->
+        <div class="row">
+            <div class="col m3 blank-space"></div>
+            <div class="col m6 question-title"></div>
+            <div class="col m3 blank-space"></div>
+        </div>
         <br>
-        <div class="row question">What dose DOM stand for</div>
-
+        <!-- Row -->
         <div class="row">
             <div class="col m3 blank-space"></div>
-            <div class="col m6 answers answer-1" data-answervalue="1">Digital Ohm Meter</div>
+            <div class="col m6 answer answer-1"></div>
             <div class="col m3 blank-space"></div>
         </div>
-        <!-- ROW -->
         <div class="row">
             <div class="col m3 blank-space"></div>
-            <div class="col m6 answers answer-2" data-answervalue="2">Do Octopus Mediate</div>
+            <div class="col m6 answer answer-2"></div>
             <div class="col m3 blank-space"></div>
         </div>
-        <!-- ROW -->
         <div class="row">
             <div class="col m3 blank-space"></div>
-            <div class="col m6 answers answer-3" data-answervalue="3">Document Object Model</div>
+            <div class="col m6 answer answer-3"></div>
             <div class="col m3 blank-space"></div>
         </div>
-        <!-- ROW -->
         <div class="row">
             <div class="col m3 blank-space"></div>
-            <div class="col m6 answers answer-4" data-answervalue="4">Dirty Old Man</div>
+            <div class="col m6 answer answer-4"></div>
             <div class="col m3 blank-space"></div>
         </div>
-        <!-- ROW -->
-
-        <div id="correct">
-            <div>Correct!</div>
-        </div>
-        <div id="incorrect">
-            <div>Incorrect. The correct answer is:</div>
-            <div>Document Object Model</div>
-        </div>
-        <div id="out-of-time">
-            <div>You ran out of time. The answer is:</div>
-            <div>Documetn Object Model</div>
-        </div>
+        
     </section>
-
-
-    <!-- QUESTION 2 -->
-
-    <section class="container questions" id="q-2">
-        <span class="row time-left">Time left:
-            <span id="time-left-num"></span>
-        </span>
-        <br>
-        <div class="row question">Which of these is an anchor tag</div>
-
-        <div class="row">
-            <div class="col m3 blank-space"></div>
-            <div class="col m6 answers answer-1">&ltimg&gt</div>
-            <div class="col m3 blank-space"></div>
-        </div>
-        <!-- ROW -->
-        <div class="row">
-            <div class="col m3 blank-space"></div>
-            <div class="col m6 answers answer-2">attr=""</div>
-            <div class="col m3 blank-space"></div>
-        </div>
-        <!-- ROW -->
-        <div class="row">
-            <div class="col m3 blank-space"></div>
-            <div class="col m6 answers answer-3">class=""</div>
-            <div class="col m3 blank-space"></div>
-        </div>
-        <!-- ROW -->
-        <div class="row">
-            <div class="col m3 blank-space"></div>
-            <div class="col m6 answers answer-4">&lta&gt</div>
-            <div class="col m3 blank-space"></div>
-        </div>
-        <!-- ROW -->
-    </section>
+    <!-- END Questions Page -->
 
 </body>
 
