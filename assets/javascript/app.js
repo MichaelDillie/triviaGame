@@ -40,6 +40,7 @@ $(document).ready(function () {
     var landingPage = $(".landing-page");
     var questionsPage = $(".questions-page");
     var showAnswerWrapper = $(".show-answer-wrapper");
+    var endQuizPage = $(".end-quiz-page");
     // Start BTN
     var startGameBtn = $(".start-game-btn");
     // Question and Answers Variables
@@ -111,12 +112,21 @@ $(document).ready(function () {
 
     // Populate HTML funciton
     function populate() {
-        questionTitle.append(questionList[currentQuestion].question);
-        answerOne.append(questionList[currentQuestion].answers[0]);
-        answerTwo.append(questionList[currentQuestion].answers[1]);
-        answerThree.append(questionList[currentQuestion].answers[2]);
-        answerFour.append(questionList[currentQuestion].answers[3]);
-        correctAnswer = questionList[currentQuestion].correctAnswer;
+        console.log(currentQuestion);
+        console.log(questionList.length);
+        if(currentQuestion === questionList.length) {
+            console.log("End of quiz");
+            stopTimer();
+            stopAnswerTimer();
+            endQuiz();
+        } else {
+            questionTitle.append(questionList[currentQuestion].question);
+            answerOne.append(questionList[currentQuestion].answers[0]);
+            answerTwo.append(questionList[currentQuestion].answers[1]);
+            answerThree.append(questionList[currentQuestion].answers[2]);
+            answerFour.append(questionList[currentQuestion].answers[3]);
+            correctAnswer = questionList[currentQuestion].correctAnswer;
+        }
     }
     // Depopulate HTML funciton
     function depopulate() {
@@ -127,8 +137,16 @@ $(document).ready(function () {
         answerFour.empty();
         showTheAnswer.empty();
     }
+    // Funciton that will display the correct answer
     function showAnswer() {
         showTheAnswer.append("The correct answer is " + correctAnswer);
+    }
+    // endQuiz stops populate from running and displays end quiz page
+    function endQuiz() {
+        $(".end-quiz").append(incorrect + " " + correct)
+        questionsPage.hide();
+        landingPage.hide();
+        endQuizPage.show();
     }
 
     // If time runs out
@@ -148,6 +166,7 @@ $(document).ready(function () {
     answerRow.on("click", ".answer", function () {
         userAnswer = $(this).text();
         if (userAnswer === correctAnswer) {
+
             stopTimer();
             stopAnswerTimer();
             correct++;
