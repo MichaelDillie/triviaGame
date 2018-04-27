@@ -33,9 +33,11 @@ $(document).ready(function () {
     var intervalId;
     var answerTimeLeft = 5;
     var answerIntervalId;
+    var timer = $(".timer");
     // Page Variables
     var landingPage = $(".landing-page");
     var questionsPage = $(".questions-page");
+    var showAnswerWrapper = $(".show-answer-wrapper");
     // Start BTN
     var startGameBtn = $(".start-game-btn");
     // Question and Answers Variables
@@ -45,6 +47,7 @@ $(document).ready(function () {
     var answerThree = $(".answer-3");
     var answerFour = $(".answer-4");
     var answerRow = $("#answer-row");
+    var showTheAnswer = $(".show-answer");
     // Placeholder for correct/incorrect condition
     var correctAnswer;
     var userAnswer;
@@ -65,6 +68,7 @@ $(document).ready(function () {
     // This function will call decrementQuestionTimer in 1 second when ran
     function questionTimer() {
         intervalId = setTimeout(decrementQuestionTimer, 1000);
+        timer.text("Time left: " + timeLeft);
     }
     // Decrements timeLeft until 0
     function decrementQuestionTimer() {
@@ -80,9 +84,11 @@ $(document).ready(function () {
     }
 
     // **** TIMER FOR SHOWING ANSWER ****
+    // This function will call decrementAnswerTimer in 1 second when ran
     function showAnswerTimer() {
         answerIntervalId = setTimeout(decrementAnswerTimer, 1000);
     }
+    // Decrements timeLeft until 0
     function decrementAnswerTimer() {
         answerTimeLeft--;
         showAnswerTimer();
@@ -92,9 +98,11 @@ $(document).ready(function () {
             populate();
             timeLeft = 10;
             questionTimer();
+            questionsPage.show();
             answerTimeLeft = 5;
         }
     }
+    // Stops the timer
     function stopAnswerTimer() {
         clearTimeout(answerIntervalId);
     }
@@ -115,13 +123,20 @@ $(document).ready(function () {
         answerTwo.empty();
         answerThree.empty();
         answerFour.empty();
+        showTheAnswer.empty();
+    }
+    function showAnswer() {
+        showTheAnswer.append("The correct answer is " + correctAnswer);
     }
 
     // If time runs out
     function outOfTime() {
         stopTimer();
         stopAnswerTimer();
+        showAnswer();
         currentQuestion++;
+        questionsPage.hide();
+        showAnswerWrapper.show();
         answerTimeLeft = 5;
         showAnswerTimer();
     }
@@ -142,7 +157,10 @@ $(document).ready(function () {
             // show correct answer and start timer
             stopTimer();
             stopAnswerTimer();
+            showAnswer();
             currentQuestion++;
+            questionsPage.hide();
+            showAnswerWrapper.show();
             answerTimeLeft = 5;
             showAnswerTimer();
         }
