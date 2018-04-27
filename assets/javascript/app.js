@@ -28,6 +28,8 @@ $(document).ready(function () {
 
 
     var currentQuestion = 0;
+    correct = 0;
+    incorrect = 0;
     // Timer Variables
     var timeLeft = 10;
     var intervalId;
@@ -134,6 +136,7 @@ $(document).ready(function () {
         stopTimer();
         stopAnswerTimer();
         showAnswer();
+        incorrect++;
         currentQuestion++;
         questionsPage.hide();
         showAnswerWrapper.show();
@@ -147,6 +150,7 @@ $(document).ready(function () {
         if (userAnswer === correctAnswer) {
             stopTimer();
             stopAnswerTimer();
+            correct++;
             currentQuestion++;
             depopulate();
             populate();
@@ -157,8 +161,9 @@ $(document).ready(function () {
             // show correct answer and start timer
             stopTimer();
             stopAnswerTimer();
-            showAnswer();
+            incorrect++;
             currentQuestion++;
+            showAnswer();
             questionsPage.hide();
             showAnswerWrapper.show();
             answerTimeLeft = 5;
