@@ -26,10 +26,13 @@ $(document).ready(function () {
         }
     ];
 
-    // console.log(questionList[0].answers[2]);
-
 
     var currentQuestion = 0;
+    // Timer Variables
+    var timeLeft = 10;
+    var intervalId;
+    var answerTimeLeft = 5;
+    var answerIntervalId;
     // Page Variables
     var landingPage = $(".landing-page");
     var questionsPage = $(".questions-page");
@@ -41,19 +44,61 @@ $(document).ready(function () {
     var answerTwo = $(".answer-2");
     var answerThree = $(".answer-3");
     var answerFour = $(".answer-4");
+    var answerRow = $("#answer-row");
+    // Placeholder for correct/incorrect condition
+    var correctAnswer;
+    var userAnswer;
 
-    var test = $(".answer");
-
-    // Satrts the game
+    // Satrt game function
     function startGame() {
         landingPage.hide();
         questionsPage.show();
         populate();
+        questionTimer();
     }
-    //  On click function
+    //  On click that starts game
     startGameBtn.on("click", function () {
         startGame();
     });
+
+    // **** TIMER FOR QUESTIONS ****
+    // This function will call decrementQuestionTimer in 1 second when ran
+    function questionTimer() {
+        intervalId = setTimeout(decrementQuestionTimer, 1000);
+    }
+    // Decrements timeLeft until 0
+    function decrementQuestionTimer() {
+        timeLeft--;
+        questionTimer();
+        if(timeLeft === 0) {
+            outOfTime();
+        }
+    }
+    // Stops the timer
+    function stopTimer() {
+        clearTimeout(intervalId);
+    }
+
+    // **** TIMER FOR SHOWING ANSWER ****
+    function showAnswerTimer() {
+        answerIntervalId = setTimeout(decrementAnswerTimer, 1000);
+    }
+    function decrementAnswerTimer() {
+        answerTimeLeft--;
+        showAnswerTimer();
+        if(answerTimeLeft === 0) {
+            stopAnswerTimer();
+            depopulate();
+            populate();
+            timeLeft = 10;
+            questionTimer();
+            answerTimeLeft = 5;
+        }
+    }
+    function stopAnswerTimer() {
+        clearTimeout(answerIntervalId);
+    }
+
     // Populate HTML funciton
     function populate() {
         questionTitle.append(questionList[currentQuestion].question);
@@ -61,10 +106,46 @@ $(document).ready(function () {
         answerTwo.append(questionList[currentQuestion].answers[1]);
         answerThree.append(questionList[currentQuestion].answers[2]);
         answerFour.append(questionList[currentQuestion].answers[3]);
+        correctAnswer = questionList[currentQuestion].correctAnswer;
+    }
+    // Depopulate HTML funciton
+    function depopulate() {
+        questionTitle.empty();
+        answerOne.empty();
+        answerTwo.empty();
+        answerThree.empty();
+        answerFour.empty();
     }
 
-    test.on("click", function () {
-        console.log(test.val());
+    // If time runs out
+    function outOfTime() {
+        stopTimer();
+        stopAnswerTimer();
+        currentQuestion++;
+        answerTimeLeft = 5;
+        showAnswerTimer();
+    }
+
+    // On click that handels user guess
+    answerRow.on("click", ".answer", function () {
+        userAnswer = $(this).text();
+        if (userAnswer === correctAnswer) {
+            stopTimer();
+            stopAnswerTimer();
+            currentQuestion++;
+            depopulate();
+            populate();
+            timeLeft = 10;
+            questionTimer();
+            answerTimeLeft = 5;
+        } else {
+            // show correct answer and start timer
+            stopTimer();
+            stopAnswerTimer();
+            currentQuestion++;
+            answerTimeLeft = 5;
+            showAnswerTimer();
+        }
     });
 
 });
